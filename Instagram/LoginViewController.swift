@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
             else{
-                self.createAlert(alertTitle: "Log In Failed", alertMessage: (error?.localizedDescription)!, actionTitle: "OK")
+                self.createAlert(alertTitle: "Log In Failed", alertMessage: (error?.localizedDescription)!, actionTitle: "OK", segue: false)
             }
         }
     }
@@ -42,19 +42,24 @@ class LoginViewController: UIViewController {
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if(success){
-                self.createAlert(alertTitle: "Account created!", alertMessage: "You have successfully created a new account", actionTitle: "OK")
+                self.createAlert(alertTitle: "Account created!", alertMessage: "You have successfully created a new account", actionTitle: "OK", segue: true)
             }
             else{
-                self.createAlert(alertTitle: "Sign Up Failed", alertMessage: (error?.localizedDescription)!, actionTitle: "OK")
+                self.createAlert(alertTitle: "Sign Up Failed", alertMessage: (error?.localizedDescription)!, actionTitle: "OK", segue: false)
             }
         }
-    }
+    } 
     
-    func createAlert(alertTitle: String, alertMessage: String, actionTitle: String){
+    func createAlert(alertTitle: String, alertMessage: String, actionTitle: String, segue: Bool){
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: actionTitle, style: .default) { (action) -> Void in
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        var action: UIAlertAction!
+        if(segue == true){
+            action = UIAlertAction(title: actionTitle, style: .default) { (action) -> Void in
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
+        else{
+            action = UIAlertAction(title: actionTitle, style: .default, handler: nil)
         }
         
         alert.addAction(action)

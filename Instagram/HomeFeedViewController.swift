@@ -140,11 +140,13 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        if let indexPath = tableView.indexPath(for: cell){
-            let post = posts![indexPath.row]
-            let detailViewController = segue.destination as! DetailsViewController
-            detailViewController.post = post as! Post
+        if let cell = sender as? UITableViewCell{
+            if let indexPath = tableView.indexPath(for: cell){
+                let post = posts![indexPath.row]
+                let detailViewController = segue.destination as! DetailsViewController
+                detailViewController.post = post as! Post
+            }
+            
         }
     }
     
