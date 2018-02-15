@@ -14,6 +14,7 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var tableView: UITableView!
     var posts: [PFObject]?
+    var refreshControl: UIRefreshControl!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let posts = posts {
@@ -46,6 +47,10 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         query.includeKey("author")
         query.limit = 20
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+
         // fetch data asynchronously
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
@@ -64,6 +69,24 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     
+    @objc func refreshControlAction(_refreshControl: UIRefreshControl){
+        let query = PFQuery(className: "Post")
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        query.limit = 20
+        
+        // fetch data asynchronously
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                self.posts = posts
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            } else {
+                self.createAlert(alertTitle: "Cannot Refresh Page", alertMessage: "Cannot load posts from server", actionTitle: "OK")
+            }
+        }
+    }
+    
     @IBAction func takePicture(_ sender: Any) {
         self.performSegue(withIdentifier: "takePictureSegue", sender: nil)
     }
@@ -71,12 +94,8 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func onLogOut(_ sender: Any) {
         PFUser.logOutInBackground { (error: Error?) in
             if(error != nil){
-                let alert = UIAlertController(title: "Sign Out Failed", message: "The sign out process failed", preferredStyle: .alert)
-                
-                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
+    
+                self.createAlert(alertTitle: "Sign Out Failed", alertMessage: "The sign out process failed", actionTitle: "OK")
             }
             else{
                 self.performSegue(withIdentifier: "logoutSegue", sender: nil)
@@ -100,6 +119,14 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
                 print(error!.localizedDescription)
             }
         }
+    }
+    
+    func createAlert(alertTitle: String, alertMessage: String, actionTitle: String){
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: actionTitle, style: .default, handler: nil)
+        
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
