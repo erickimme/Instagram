@@ -15,9 +15,11 @@ class FeedCell: UITableViewCell {
  
     @IBOutlet weak var pictureImageView: PFImageView!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     var post: PFObject!{
         didSet{
+            usernameLabel.text = PFUser.current()?.username
             self.captionLabel.text = post["caption"] as? String
             print(post["media"])
             pictureImageView.file = post["media"] as! PFFile

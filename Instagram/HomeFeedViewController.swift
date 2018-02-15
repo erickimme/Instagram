@@ -42,7 +42,7 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         
-        var query = PFQuery(className: "Post")
+        let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
         query.includeKey("author")
         query.limit = 20
@@ -132,6 +132,20 @@ class HomeFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell){
+            let post = posts![indexPath.row]
+            let detailViewController = segue.destination as! DetailsViewController
+            detailViewController.post = post as! Post
+        }
     }
     
 

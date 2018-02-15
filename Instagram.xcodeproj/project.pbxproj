@@ -21,6 +21,7 @@
 		E635D5B12033266D00D2DC3A /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635D5B02033266D00D2DC3A /* ComposeViewController.swift */; };
 		E635D5B3203326C700D2DC3A /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635D5B2203326C700D2DC3A /* FeedCell.swift */; };
 		E635D5B72033FF8F00D2DC3A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635D5B62033FF8F00D2DC3A /* Post.swift */; };
+		E661BCCD20353562002AD98B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661BCCC20353562002AD98B /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		E635D5B02033266D00D2DC3A /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		E635D5B2203326C700D2DC3A /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		E635D5B62033FF8F00D2DC3A /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		E661BCCC20353562002AD98B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		FA16BB4CE0C4D81811758858 /* Pods_InstagramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				E635D5B02033266D00D2DC3A /* ComposeViewController.swift */,
 				E635D5B2203326C700D2DC3A /* FeedCell.swift */,
 				E635D5B62033FF8F00D2DC3A /* Post.swift */,
+				E661BCCC20353562002AD98B /* DetailsViewController.swift */,
 			);
 			path = Instagram;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				E635D5B3203326C700D2DC3A /* FeedCell.swift in Sources */,
 				E628FD1A20322FA400F661DD /* LoginViewController.swift in Sources */,
 				E635D5B72033FF8F00D2DC3A /* Post.swift in Sources */,
+				E661BCCD20353562002AD98B /* DetailsViewController.swift in Sources */,
 				E628FCEC20322D1700F661DD /* AppDelegate.swift in Sources */,
 				E628FD1C2032364300F661DD /* HomeFeedViewController.swift in Sources */,
 			);

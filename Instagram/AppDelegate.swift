@@ -22,9 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "instaballa"
                 configuration.clientKey = "dbaldfsbauiebfpfaiegpiuaebrb"  // set to nil assuming you have not set clientKey
-                configuration.server = "http://intense-brook-58499.herokuapp.com/parse"
+              configuration.server = "http://intense-brook-58499.herokuapp.com/parse"
             })
         )
+        
+        if PFUser.current() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // view controller currently being set in Storyboard as default will be overridden
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeFeedViewController")
+        }
         
         return true
     }
